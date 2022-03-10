@@ -12,25 +12,48 @@
       href="./images/favicon-32x32.png"
     />
     <link rel="stylesheet" href="./scss/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
 
     <title>Todo app</title>
   </head>
   <body>
     <header>
       <h1 class="logo-header">TODO</h1>
-      <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26">
-        <path
-          fill="#FFF"
-          fill-rule="evenodd"
-          d="M13 0c.81 0 1.603.074 2.373.216C10.593 1.199 7 5.43 7 10.5 7 16.299 11.701 21 17.5 21c2.996 0 5.7-1.255 7.613-3.268C23.22 22.572 18.51 26 13 26 5.82 26 0 20.18 0 13S5.82 0 13 0z"
-        />
-      </svg>
+      <img class="icon-moon" src="./images/icon-moon.svg" alt="" />
     </header>
 
     <main>
       <section class="input-container">
-        <form action="">
-          <input type="text" name="" id="" />
+        <form class="input-form">
+          <div class="checkmark-container">
+            <div class="circle">
+              <svg
+                class="checkmark hide"
+                xmlns="http://www.w3.org/2000/svg"
+                width="11"
+                height="9"
+              >
+                <path
+                  fill="none"
+                  stroke="#000"
+                  stroke-width="2"
+                  d="M1 4.304L3.696 7l6-6"
+                />
+              </svg>
+            </div>
+          </div>
+          <input
+            class="todo-input"
+            type="text"
+            name=""
+            id=""
+            placeholder="Create a new todo..."
+          />
         </form>
       </section>
       <section class="todo-container">
