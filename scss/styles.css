@@ -1,64 +1,3 @@
-body {
-  padding: 4.8rem 2.4rem;
-}
-
-body header {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-
-body header .logo-header {
-  color: black;
-  letter-spacing: 12px;
-}
-
-body header .icon-moon {
-  width: 1.932rem;
-  height: 2rem;
-}
-
-body main .input-container .input-form {
-  width: 100%;
-  height: 4.8rem;
-  border: none;
-  border-radius: 5px;
-  background: white;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  padding: 0 2rem;
-  cursor: pointer;
-}
-
-body main .input-container .input-form .circle {
-  height: 20px;
-  width: 20px;
-  border-radius: 90px;
-  border: 0.1rem #e3e4f1 solid;
-}
-
-body main .input-container .input-form .circle .checkmark {
-  margin-left: 0.4rem;
-  margin-top: 0.5rem;
-}
-
-body main .input-container .input-form .todo-input {
-  border: none;
-}
-
 *,
 *::before,
 *::after {
@@ -181,5 +120,161 @@ input::-webkit-inner-spin-button {
 
 .hide {
   display: none;
+}
+
+body {
+  padding: 4.8rem 2.4rem;
+}
+
+body header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-bottom: 4rem;
+}
+
+body header .logo-header {
+  color: black;
+  letter-spacing: 12px;
+}
+
+body header .icon-moon {
+  width: 1.932rem;
+  height: 2rem;
+}
+
+body main .input-container {
+  margin-bottom: 1.6rem;
+}
+
+body main .input-container .todo {
+  width: 100%;
+  height: 4.8rem;
+  border: none;
+  border-radius: 5px;
+  background: white;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 1.3rem;
+  padding: 0 2rem;
+  cursor: pointer;
+}
+
+body main .input-container .todo .circle {
+  height: 20px;
+  width: 20px;
+  border-radius: 90px;
+  border: 0.1rem #e3e4f1 solid;
+}
+
+body main .input-container .todo .circle .checkmark {
+  margin-left: 0.4rem;
+  margin-top: 0.5rem;
+}
+
+body main .input-container .todo .todo-input {
+  width: 100%;
+  height: 4.8rem;
+  border: none;
+  outline: none;
+  color: #484b6a;
+  font-size: 1.5rem;
+  letter-spacing: -0.017rem;
+}
+
+body main .todo-container ul .list-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  height: 5.2rem;
+  border: none;
+  background: white;
+  padding: 0 2rem;
+  border-bottom: 1px #e4e5f1 solid;
+}
+
+body main .todo-container ul .list-item:nth-child(1) {
+  border-radius: 5px 5px 0 0;
+}
+
+body main .todo-container .todo-info-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 5rem;
+  background: white;
+  padding: 0 2rem;
+  width: 100%;
+  border-radius: 0 0 5px 5px;
+  margin-bottom: 1.6rem;
+}
+
+body main .todo-container .todo-info-container .items-left {
+  color: #9394a5;
+  font-size: 1.4rem;
+  letter-spacing: -0.017rem;
+}
+
+body main .todo-container .todo-info-container .btn-clear {
+  color: #9394a5;
+  font-size: 1.4rem;
+  letter-spacing: -0.017rem;
+}
+
+body main .filter-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 2rem;
+  width: 100%;
+  height: 4.8rem;
+  background: white;
+  border-radius: 5px;
+  margin-bottom: 4rem;
+}
+
+body main .filter-container .btn {
+  color: #9394a5;
+  font-weight: 700;
+  font-size: 1.4rem;
+}
+
+body main .instruction-paragraph {
+  color: #9394a5;
+  font-size: 1.4rem;
+  letter-spacing: -0.019rem;
+  text-align: center;
 }
 /*# sourceMappingURL=styles.css.map */

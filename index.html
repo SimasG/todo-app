@@ -29,7 +29,7 @@
 
     <main>
       <section class="input-container">
-        <form class="input-form">
+        <form class="todo input-form">
           <div class="checkmark-container">
             <div class="circle">
               <svg
@@ -58,11 +58,11 @@
       </section>
       <section class="todo-container">
         <ul>
-          <li>
+          <li class="todo list-item">
             <svg xmlns="http://www.w3.org/2000/svg" width="11" height="9">
               <path
                 fill="none"
-                stroke="#FFF"
+                stroke="#000"
                 stroke-width="2"
                 d="M1 4.304L3.696 7l6-6"
               />
@@ -76,11 +76,11 @@
               />
             </svg>
           </li>
-          <li>
+          <li class="todo list-item">
             <svg xmlns="http://www.w3.org/2000/svg" width="11" height="9">
               <path
                 fill="none"
-                stroke="#FFF"
+                stroke="#000"
                 stroke-width="2"
                 d="M1 4.304L3.696 7l6-6"
               />
@@ -94,11 +94,11 @@
               />
             </svg>
           </li>
-          <li>
+          <li class="todo list-item">
             <svg xmlns="http://www.w3.org/2000/svg" width="11" height="9">
               <path
                 fill="none"
-                stroke="#FFF"
+                stroke="#000"
                 stroke-width="2"
                 d="M1 4.304L3.696 7l6-6"
               />
@@ -113,23 +113,19 @@
             </svg>
           </li>
         </ul>
-        <div class="">
+        <div class="todo-info-container">
           <p class="items-left">x items left</p>
-          <button class="btn btn-clear">Clear Completed</button>
+          <button class="btn-clear">Clear Completed</button>
         </div>
       </section>
       <section class="filter-container">
-        <button class="btn-all">All</button>
-        <button class="btn-active">Active</button>
-        <button class="btn-completed">Completed</button>
+        <button class="btn btn-all">All</button>
+        <button class="btn btn-active">Active</button>
+        <button class="btn btn-completed">Completed</button>
       </section>
 
-      <p>Drag and drop to reorder the list</p>
+      <p class="instruction-paragraph">Drag and drop to reorder the list</p>
     </main>
-
-    <!-- Add dynamic number -->
-    items left All Active Completed Clear Completed Drag and drop to reorder
-    list
   </body>
   <script src="./script.js" defer></script>
 </html>
