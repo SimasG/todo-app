@@ -1,8 +1,10 @@
 // TODO: add todos to the list -> DONE
 // TODO: delete todos from the list -> DONE
 // TODO: mark todos as complete -> DONE
-// TODO clear all completed todos -> DONE
+// TODO: clear all completed todos -> DONE
+// TODO: display numbers of todos left -> 50% DONE
 
+// TODO: play around with localStorage
 // TODO: clean UI stuff (limit todo size, etc.)
 
 const form = document.querySelector(".input-form");
@@ -12,6 +14,7 @@ const deleteBtn = document.querySelectorAll(".delete");
 const todoInfoContainer = document.querySelector(".todo-info-container");
 const completeBtn = document.querySelectorAll(".circle");
 const clearBtn = document.querySelector(".btn-clear");
+const itemsLeft = document.querySelector(".items-left");
 
 form.addEventListener("submit", function (e) {
   e.preventDefault();
@@ -62,6 +65,7 @@ function addNewTodo() {
       console.log("dynamic btn clicked!");
       console.log(e.target.parentElement);
       e.target.parentElement.remove();
+      displayTodosLeft();
     });
   });
 
@@ -72,6 +76,8 @@ function addNewTodo() {
       btn.parentNode.querySelector(".todo-text").style.color = "#D1D2DA";
       btn.parentNode.querySelector(".todo-text").classList.add("strikethrough");
       btn.classList.add("completed");
+      btn.parentNode.classList.add("todo-completed");
+      displayTodosLeft();
     });
   });
 }
@@ -82,6 +88,7 @@ deleteBtn.forEach((btn) => {
     console.log("static btn clicked");
     console.log(e.target.parentElement);
     e.target.parentElement.remove();
+    displayTodosLeft();
   });
 });
 
@@ -93,6 +100,8 @@ completeBtn.forEach((btn) => {
     btn.parentNode.querySelector(".todo-text").style.color = "#D1D2DA";
     btn.parentNode.querySelector(".todo-text").classList.add("strikethrough");
     btn.classList.add("completed");
+    btn.parentNode.classList.add("todo-completed");
+    displayTodosLeft();
   });
 });
 
@@ -102,4 +111,20 @@ clearBtn.addEventListener("click", () => {
   document.querySelectorAll(".completed").forEach((todo) => {
     todo.parentNode.remove();
   });
+  displayTodosLeft();
 });
+
+// display number of todos left
+function displayTodosLeft() {
+  let allTodos;
+  let completedTodos;
+  let todosLeft;
+  allTodos = todoList.getElementsByTagName("li").length;
+  completedTodos = todoList.getElementsByClassName("completed").length;
+  todosLeft = allTodos - completedTodos;
+  if (todosLeft > 0) {
+    itemsLeft.innerHTML = `${todosLeft} items left`;
+  } else {
+    itemsLeft.innerHTML = `All done!`;
+  }
+}
