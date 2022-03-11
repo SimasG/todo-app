@@ -173,18 +173,6 @@ body main .input-container .todo {
   cursor: pointer;
 }
 
-body main .input-container .todo .circle {
-  height: 20px;
-  width: 20px;
-  border-radius: 90px;
-  border: 0.1rem #e3e4f1 solid;
-}
-
-body main .input-container .todo .circle .checkmark {
-  margin-left: 0.4rem;
-  margin-top: 0.5rem;
-}
-
 body main .input-container .todo .todo-input {
   width: 100%;
   height: 4.8rem;
@@ -211,6 +199,14 @@ body main .todo-container ul .list-item {
   background: white;
   padding: 0 2rem;
   border-bottom: 1px #e4e5f1 solid;
+}
+
+body main .todo-container ul .list-item .delete {
+  cursor: pointer;
+}
+
+body main .todo-container ul .list-item .delete-dynamic {
+  cursor: pointer;
 }
 
 body main .todo-container ul .list-item:nth-child(1) {
@@ -276,5 +272,18 @@ body main .instruction-paragraph {
   font-size: 1.4rem;
   letter-spacing: -0.019rem;
   text-align: center;
+}
+
+.circle {
+  height: 20px;
+  width: 20px;
+  border-radius: 90px;
+  border: 0.1rem #e3e4f1 solid;
+  cursor: pointer;
+}
+
+.checkmark {
+  margin-left: 0.4rem;
+  margin-top: 0.5rem;
 }
 /*# sourceMappingURL=styles.css.map */
