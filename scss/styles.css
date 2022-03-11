@@ -286,4 +286,8 @@ body main .instruction-paragraph {
   margin-left: 0.4rem;
   margin-top: 0.5rem;
 }
+
+.strikethrough {
+  text-decoration: line-through;
+}
 /*# sourceMappingURL=styles.css.map */

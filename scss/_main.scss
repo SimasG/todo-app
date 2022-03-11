@@ -59,7 +59,6 @@ body {
           display: flex;
           justify-content: space-between;
           align-items: center;
-
           width: 100%;
           height: 5.2rem;
           border: none;
@@ -135,4 +134,8 @@ body {
 .checkmark {
   margin-left: 0.4rem;
   margin-top: 0.5rem;
+}
+
+.strikethrough {
+  text-decoration: line-through;
 }

@@ -1,6 +1,6 @@
 // TODO: add todos to the list -> DONE
 // TODO: delete todos from the list -> DONE
-// TODO: mark todos as complete ->
+// TODO: mark todos as complete -> DONE
 
 // TODO: clean UI stuff (limit todo size, etc.)
 
@@ -64,7 +64,9 @@ deleteBtn.forEach((btn) => {
 // mark todo as completed
 completeBtn.forEach((btn) => {
   btn.addEventListener("click", () => {
-    console.log("heyoo");
-    // document.querySelector(".checkmark").classList.remove("hide");
+    btn.style.backgroundImage =
+      "linear-gradient(135deg, hsl(192, 100%, 67%), hsl(280, 87%, 65%))";
+    btn.parentNode.querySelector(".todo-text").style.color = "#D1D2DA";
+    btn.parentNode.querySelector(".todo-text").classList.add("strikethrough");
   });
 });

@@ -17,7 +17,11 @@ html {
 // COLORS
 // Primary
 $bright-blue: hsl(220, 98%, 61%);
-$check-background: linear-gradient hsl(192, 100%, 67%) to hsl(280, 87%, 65%);
+$check-background: linear-gradient(
+  135deg,
+  hsl(192, 100%, 67%),
+  hsl(280, 87%, 65%)
+);
 
 // Neutral
 // Light Theme
@@ -33,6 +37,7 @@ body {
   // background: $very-light-gray;
   // temporarily
   background: rgb(199, 197, 197);
+  // background-image: $check-background;
 }
 
 h1,
