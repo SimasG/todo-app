@@ -298,4 +298,12 @@ body main .instruction-paragraph {
 .gray {
   color: #d1d2da;
 }
+
+.hide {
+  display: none;
+}
+
+.todo.list-item.hide {
+  display: none;
+}
 /*# sourceMappingURL=styles.css.map */

@@ -4,7 +4,7 @@
 // TODO: clear all completed todos -> DONE
 // TODO: display numbers of todos left -> DONE
 // TODO: add ability to unmark todos as complete (toggle) -> DONE
-// TODO: filter by all/active/complete todos
+// TODO: filter by all/active/complete todos -> DONE
 
 // TODO: play around with localStorage
 // TODO: fix bugs (deleting todos, marking all todos as complete)
@@ -87,16 +87,6 @@ function addNewTodo() {
       displayTodosLeft();
     });
   });
-
-  btnCompleted.addEventListener("click", () => {
-    console.log(document.querySelectorAll("li:not(.todo-completed)"));
-    const uncompleteTasks = document.querySelectorAll(
-      "li:not(.todo-completed)"
-    );
-    uncompleteTasks.forEach((todo) => {
-      todo.remove();
-    });
-  });
 }
 
 // delete todo
@@ -148,10 +138,59 @@ function displayTodosLeft() {
 }
 
 // filter btns
-btnCompleted.addEventListener("click", () => {
-  console.log(document.querySelectorAll("li:not(.todo-completed)"));
-  const uncompleteTasks = document.querySelectorAll("li:not(.todo-completed)");
-  uncompleteTasks.forEach((todo) => {
-    todo.remove();
+function removeCompletedTasks() {
+  const completedTasks = document.querySelectorAll(".todo-completed");
+  completedTasks.forEach((todo) => {
+    // todo.remove();
+    todo.classList.add("hide");
   });
+}
+
+function addCompletedTasks() {
+  const completedTasks = document.querySelectorAll(".todo-completed");
+  completedTasks.forEach((todo) => {
+    // todo.remove();
+    todo.classList.remove("hide");
+  });
+}
+
+function removeUncompletedTasks() {
+  const uncompletedTasks = document.querySelectorAll("li:not(.todo-completed)");
+  uncompletedTasks.forEach((todo) => {
+    // todo.remove();
+    todo.classList.add("hide");
+  });
+}
+
+function addUncompletedTasks() {
+  const uncompletedTasks = document.querySelectorAll("li:not(.todo-completed)");
+  uncompletedTasks.forEach((todo) => {
+    // todo.remove();
+    todo.classList.remove("hide");
+  });
+}
+
+// display uncompleted todos
+btnActive.addEventListener("click", () => {
+  //   console.log(document.querySelectorAll(".todo-completed"));
+  console.log(document.querySelectorAll("li:not(.todo-completed)"));
+  addCompletedTasks();
+  addUncompletedTasks();
+  removeCompletedTasks();
+});
+
+// display completed todos
+btnCompleted.addEventListener("click", () => {
+  //   console.log(document.querySelectorAll("li:not(.todo-completed)"));
+  console.log(document.querySelectorAll(".todo-completed"));
+  addCompletedTasks();
+  addUncompletedTasks();
+  removeUncompletedTasks();
+});
+
+// display all todos
+btnAll.addEventListener("click", () => {
+  console.log(document.querySelectorAll(".list-item"));
+  addCompletedTasks();
+  addUncompletedTasks();
 });
