@@ -2,7 +2,9 @@
 // TODO: delete todos from the list -> DONE
 // TODO: mark todos as complete -> DONE
 // TODO: clear all completed todos -> DONE
-// TODO: display numbers of todos left -> 50% DONE
+// TODO: display numbers of todos left -> DONE
+// TODO: add ability to unmark todos as complete (toggle)
+// TODO: filter by all/active/complete todos
 
 // TODO: play around with localStorage
 // TODO: clean UI stuff (limit todo size, etc.)
@@ -65,18 +67,22 @@ function addNewTodo() {
       console.log("dynamic btn clicked!");
       console.log(e.target.parentElement);
       e.target.parentElement.remove();
-      displayTodosLeft();
     });
+    displayTodosLeft();
   });
 
   completeBtnDynamic.forEach((btn) => {
     btn.addEventListener("click", () => {
-      btn.style.backgroundImage =
-        "linear-gradient(135deg, hsl(192, 100%, 67%), hsl(280, 87%, 65%))";
-      btn.parentNode.querySelector(".todo-text").style.color = "#D1D2DA";
-      btn.parentNode.querySelector(".todo-text").classList.add("strikethrough");
-      btn.classList.add("completed");
-      btn.parentNode.classList.add("todo-completed");
+      //   btn.style.backgroundImage =
+      //     "linear-gradient(135deg, hsl(192, 100%, 67%), hsl(280, 87%, 65%))";
+      btn.classList.toggle("gradient-background");
+      //   btn.parentNode.querySelector(".todo-text").style.color = "#D1D2DA";
+      btn.parentNode.querySelector(".todo-text").classList.toggle("gray");
+      btn.parentNode
+        .querySelector(".todo-text")
+        .classList.toggle("strikethrough");
+      btn.classList.toggle("completed");
+      btn.parentNode.classList.toggle("todo-completed");
       displayTodosLeft();
     });
   });
@@ -95,12 +101,16 @@ deleteBtn.forEach((btn) => {
 // mark todo as completed
 completeBtn.forEach((btn) => {
   btn.addEventListener("click", () => {
-    btn.style.backgroundImage =
-      "linear-gradient(135deg, hsl(192, 100%, 67%), hsl(280, 87%, 65%))";
-    btn.parentNode.querySelector(".todo-text").style.color = "#D1D2DA";
-    btn.parentNode.querySelector(".todo-text").classList.add("strikethrough");
-    btn.classList.add("completed");
-    btn.parentNode.classList.add("todo-completed");
+    // btn.style.backgroundImage =
+    //   "linear-gradient(135deg, hsl(192, 100%, 67%), hsl(280, 87%, 65%))";
+    btn.classList.toggle("gradient-background");
+    // btn.parentNode.querySelector(".todo-text").style.color = "#D1D2DA";
+    btn.parentNode.querySelector(".todo-text").classList.toggle("gray");
+    btn.parentNode
+      .querySelector(".todo-text")
+      .classList.toggle("strikethrough");
+    btn.classList.toggle("completed");
+    btn.parentNode.classList.toggle("todo-completed");
     displayTodosLeft();
   });
 });

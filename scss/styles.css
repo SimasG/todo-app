@@ -290,4 +290,12 @@ body main .instruction-paragraph {
 .strikethrough {
   text-decoration: line-through;
 }
+
+.gradient-background {
+  background-image: linear-gradient(135deg, #57ddff, #c058f3);
+}
+
+.gray {
+  color: #d1d2da;
+}
 /*# sourceMappingURL=styles.css.map */
