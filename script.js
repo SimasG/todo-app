@@ -5,10 +5,44 @@
 // TODO: display numbers of todos left -> DONE
 // TODO: add ability to unmark todos as complete (toggle) -> DONE
 // TODO: filter by all/active/complete todos -> DONE
-
 // TODO: play around with localStorage
-// TODO: fix bugs (deleting todos, marking all todos as complete)
+// TODO: fix bugs (input validation (e.g. empty input), deleting todos, marking all todos as complete, shaper clear completed btn functionality)
 // TODO: clean UI stuff (limit todo size, etc.)
+
+window.addEventListener("load", () => {
+  //   console.log(localStorage.getItem("todo"));
+  const todoHtml = `<li class="todo list-item">
+      <div class="circle circle-dynamic">
+        <svg
+          class="checkmark"
+          xmlns="http://www.w3.org/2000/svg"
+          width="11"
+          height="9"
+        >
+          <path
+            fill="none"
+            stroke="#fff"
+            stroke-width="2"
+            d="M1 4.304L3.696 7l6-6"
+          />
+        </svg>
+      </div>
+      <p class="todo-text">${localStorage.getItem("todo")}</p>
+      <svg
+        class="delete-dynamic"
+        xmlns="http://www.w3.org/2000/svg"
+        width="18"
+        height="18"
+      >
+        <path
+          fill="#494C6B"
+          fill-rule="evenodd"
+          d="M16.97 0l.708.707L9.546 8.84l8.132 8.132-.707.707-8.132-8.132-8.132 8.132L0 16.97l8.132-8.132L0 .707.707 0 8.84 8.132 16.971 0z"
+        />
+      </svg>
+    </li>`;
+  todoList.insertAdjacentHTML("beforeend", todoHtml);
+});
 
 const form = document.querySelector(".input-form");
 const todoList = document.querySelector(".todo-list");
@@ -28,6 +62,9 @@ form.addEventListener("submit", function (e) {
 });
 
 function addNewTodo() {
+  const todoText =
+    document.querySelector("#todo-input").value.charAt(0).toUpperCase() +
+    document.querySelector("#todo-input").value.slice(1);
   const todoHtml = `<li class="todo list-item">
       <div class="circle circle-dynamic">
         <svg
@@ -44,10 +81,7 @@ function addNewTodo() {
           />
         </svg>
       </div>
-      <p class="todo-text">${
-        document.querySelector("#todo-input").value.charAt(0).toUpperCase() +
-        document.querySelector("#todo-input").value.slice(1)
-      }</p>
+      <p class="todo-text">${todoText}</p>
       <svg
         class="delete-dynamic"
         xmlns="http://www.w3.org/2000/svg"
@@ -62,6 +96,9 @@ function addNewTodo() {
       </svg>
     </li>`;
   todoList.insertAdjacentHTML("beforeend", todoHtml);
+
+  localStorage.setItem("todo", `${todoText}`);
+
   document.querySelector("#todo-input").value = "";
   const deleteBtnDynamic = document.querySelectorAll(".delete-dynamic");
   const completeBtnDynamic = document.querySelectorAll(".circle-dynamic");
@@ -117,7 +154,8 @@ completeBtn.forEach((btn) => {
 clearBtn.addEventListener("click", () => {
   console.log(document.querySelectorAll(".completed"));
   document.querySelectorAll(".completed").forEach((todo) => {
-    todo.parentNode.remove();
+    // todo.parentNode.remove();
+    todo.parentNode.classList.add("hide");
   });
   displayTodosLeft();
 });
