@@ -9,7 +9,8 @@
 // TODO: store more than one item (in a single session) -> DONE
 // TODO: store more than one item indefinitly -> DONE
 // TODO: display stored items indefinitely -> DONE
-// TODO: delete stored item(s)
+// TODO: manipulate (complete, uncomplete, delete stored item(s))
+// Problem: I'm unable to manipulate items that are stored in local storage and displayed
 
 // TODO: fix bugs (input validation (e.g. empty input), deleting todos, marking all todos as complete, shaper clear completed btn functionality)
 // TODO: clean UI stuff (limit todo size, etc.)
@@ -33,11 +34,7 @@ form.addEventListener("submit", function (e) {
 
 let todos = [
   {
-    tasks: [
-      {
-        content: "shitty shit",
-      },
-    ],
+    tasks: [],
   },
 ];
 
@@ -147,8 +144,10 @@ function addNewTodo() {
 
 // checking if todos key is available
 if (localStorage && localStorage.getItem("todos")) {
+  // if so, parse todos into a displayable object
   todos = JSON.parse(localStorage.getItem("todos"));
 } else {
+  // if not, convert todos into a string (for storing)
   localStorage.setItem("todos", JSON.stringify(todos));
 }
 
@@ -173,6 +172,12 @@ deleteBtn.forEach((btn) => {
     e.target.parentElement.remove();
     displayTodosLeft();
   });
+});
+
+todoList.addEventListener("click", (e) => {
+  if (e.target.classList.value === "delete") {
+    e.target.parentNode.remove();
+  }
 });
 
 // mark todo as completed
