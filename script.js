@@ -164,20 +164,14 @@ if (localStorage && localStorage.getItem("todos")) {
 // stop
 // stop
 
-// delete todo
-deleteBtn.forEach((btn) => {
-  btn.addEventListener("click", (e) => {
-    console.log("static btn clicked");
-    console.log(e.target.parentElement);
-    e.target.parentElement.remove();
-    displayTodosLeft();
-  });
-});
-
+// delete todo - seems more difficult than it has to be
 todoList.addEventListener("click", (e) => {
   if (e.target.classList.value === "delete") {
     e.target.parentNode.remove();
+  } else if (e.target.parentNode.classList.value === "delete") {
+    e.target.parentNode.parentNode.remove();
   }
+  displayTodosLeft();
 });
 
 // mark todo as completed
