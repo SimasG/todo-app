@@ -32,11 +32,9 @@ form.addEventListener("submit", function (e) {
   addNewTodo();
 });
 
-let todos = [
-  {
-    tasks: [],
-  },
-];
+let todos = {
+  tasks: [],
+};
 
 function addNewTodo() {
   //   const todoText =
@@ -111,7 +109,7 @@ function addNewTodo() {
 </li>`;
   todoList.insertAdjacentHTML("afterbegin", todoHtml);
 
-  todos[0].tasks.push(todo);
+  todos.tasks.push(todo);
 
   localStorage.setItem("todos", JSON.stringify(todos));
 
@@ -164,13 +162,46 @@ if (localStorage && localStorage.getItem("todos")) {
 // stop
 // stop
 
+// there is probably a way to implement localStorage with unique key-value pairs for each todo but still
+// not sure how to handle single key-value pair manipulation
+
 // delete todo - seems more difficult than it has to be
 todoList.addEventListener("click", (e) => {
-  if (e.target.classList.value === "delete") {
-    e.target.parentNode.remove();
-  } else if (e.target.parentNode.classList.value === "delete") {
-    e.target.parentNode.parentNode.remove();
+  let storageLength = JSON.parse(localStorage["todos"]).tasks.length;
+
+  // for svg -> done. for path -> to do
+  for (let i = 0; i < storageLength; i++) {
+    if (
+      e.target.parentNode.childNodes[3].innerHTML ===
+      JSON.parse(localStorage["todos"]).tasks[i].content
+    ) {
+      console.log(e.target.parentNode.childNodes[3].innerHTML);
+      console.log(JSON.parse(localStorage["todos"]).tasks[i].content);
+
+      const newTodos = todos.tasks.filter((todo) => {
+        return (
+          todo.content !== JSON.parse(localStorage["todos"]).tasks[i].content
+        );
+      });
+
+      todos.tasks = newTodos;
+      localStorage.setItem("todos", JSON.stringify(todos));
+      e.target.parentNode.remove();
+    }
   }
+
+  // if (
+  //   JSON.parse(localStorage["todos"]).tasks[0].content ===
+  //   e.target.parentNode.childNodes[3].innerHTML
+  // ) {
+  //   console.log("eureka!");
+  // }
+
+  // if (e.target.classList.value === "delete") {
+  //   e.target.parentNode.remove();
+  // } else if (e.target.parentNode.classList.value === "delete") {
+  //   e.target.parentNode.parentNode.remove();
+  // }
   displayTodosLeft();
 });
 
@@ -283,7 +314,7 @@ btnAll.addEventListener("click", () => {
 // stop
 
 window.addEventListener("load", () => {
-  for (let todo of todos[0].tasks) {
+  for (let todo of todos.tasks) {
     const todoHtml = `<li class="todo list-item">
           <div class="circle">
             <svg
