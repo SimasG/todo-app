@@ -1,7 +1,6 @@
 // TODO: manipulate (complete, uncomplete, delete stored item(s)) -> DONE
-
-// TODO: fix bugs (input validation (e.g. empty input), items left functionality) -> WIP
-// TODO: clean UI stuff (limit todo text size, etc.)
+// TODO: fix bugs (input validation (e.g. empty input), items left functionality) -> DONE
+// TODO: clean UI stuff (limit todo text size, etc.) -> DONE
 // TODO: add drag & drop
 // TODO: (maybe) -> fix duplicate input bug (possible solution: unique ID)
 
@@ -32,8 +31,13 @@ function addNewTodo() {
     content: txt.value,
   };
 
-  if (todo.content === "" || todo.content == null) return;
-  if (todo.content.match(/^\s+/g)) return;
+  if (
+    todo.content === "" ||
+    todo.content == null ||
+    todo.content.length > 75 ||
+    todo.content.match(/^\s+/g)
+  )
+    return;
   if (todo.content.match(/\w{1,}/g)) {
     todo.content = todo.content.trim();
   }

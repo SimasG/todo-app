@@ -63,6 +63,9 @@ body {
           background: white;
           padding: 0 2rem;
           border-bottom: 1px $very-light-grayish-blue solid;
+          .todo-text {
+            padding: 1.5rem;
+          }
           .delete {
             cursor: pointer;
           }

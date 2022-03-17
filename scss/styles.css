@@ -201,6 +201,10 @@ body main .todo-container ul .list-item {
   border-bottom: 1px #e4e5f1 solid;
 }
 
+body main .todo-container ul .list-item .todo-text {
+  padding: 1.5rem;
+}
+
 body main .todo-container ul .list-item .delete {
   cursor: pointer;
 }
