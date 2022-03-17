@@ -78,34 +78,13 @@ function addNewTodo() {
   };
 
   const todoHtml = `<li class="todo list-item">
-  <div class="circle circle-dynamic">
-    <svg
-      class="checkmark"
-      xmlns="http://www.w3.org/2000/svg"
-      width="11"
-      height="9"
-    >
-      <path
-        fill="none"
-        stroke="#fff"
-        stroke-width="2"
-        d="M1 4.304L3.696 7l6-6"
-      />
-    </svg>
+  <div class="circle">
+    <img class="checkmark" src="./images/icon-check.svg" alt="" />
   </div>
   <p class="todo-text">${todo.content}</p>
-  <svg
-    class="delete-dynamic"
-    xmlns="http://www.w3.org/2000/svg"
-    width="18"
-    height="18"
-  >
-    <path
-      fill="#494C6B"
-      fill-rule="evenodd"
-      d="M16.97 0l.708.707L9.546 8.84l8.132 8.132-.707.707-8.132-8.132-8.132 8.132L0 16.97l8.132-8.132L0 .707.707 0 8.84 8.132 16.971 0z"
-    />
-  </svg>
+  <div>
+    <img class="delete" src="./images/icon-cross.svg" alt="" />
+  </div>
 </li>`;
   todoList.insertAdjacentHTML("afterbegin", todoHtml);
 
@@ -162,46 +141,40 @@ if (localStorage && localStorage.getItem("todos")) {
 // stop
 // stop
 
-// there is probably a way to implement localStorage with unique key-value pairs for each todo but still
-// not sure how to handle single key-value pair manipulation
-
-// delete todo - seems more difficult than it has to be
 todoList.addEventListener("click", (e) => {
   let storageLength = JSON.parse(localStorage["todos"]).tasks.length;
 
-  // for svg -> done. for path -> to do
+  // delete btn
   for (let i = 0; i < storageLength; i++) {
     if (
-      e.target.parentNode.childNodes[3].innerHTML ===
-      JSON.parse(localStorage["todos"]).tasks[i].content
+      e.target.parentNode.parentNode.childNodes[3].innerHTML ===
+        JSON.parse(localStorage["todos"]).tasks[i].content &&
+      e.target.classList.value === "delete"
     ) {
-      console.log(e.target.parentNode.childNodes[3].innerHTML);
-      console.log(JSON.parse(localStorage["todos"]).tasks[i].content);
-
       const newTodos = todos.tasks.filter((todo) => {
         return (
           todo.content !== JSON.parse(localStorage["todos"]).tasks[i].content
         );
       });
-
       todos.tasks = newTodos;
       localStorage.setItem("todos", JSON.stringify(todos));
-      e.target.parentNode.remove();
+      e.target.parentNode.parentNode.remove();
     }
   }
 
-  // if (
-  //   JSON.parse(localStorage["todos"]).tasks[0].content ===
-  //   e.target.parentNode.childNodes[3].innerHTML
-  // ) {
-  //   console.log("eureka!");
+  console.log(e.target);
+
+  // complete btn
+  // for (let i = 0; i < storageLength; i++) {
+  //   if (
+  //     e.target.parentNode.parentNode.childNodes[3].innerHTML ===
+  //       JSON.parse(localStorage["todos"]).tasks[i].content &&
+  //     e.target.classList.value === "delete"
+  //   ) {
+
+  //   }
   // }
 
-  // if (e.target.classList.value === "delete") {
-  //   e.target.parentNode.remove();
-  // } else if (e.target.parentNode.classList.value === "delete") {
-  //   e.target.parentNode.parentNode.remove();
-  // }
   displayTodosLeft();
 });
 
@@ -316,35 +289,14 @@ btnAll.addEventListener("click", () => {
 window.addEventListener("load", () => {
   for (let todo of todos.tasks) {
     const todoHtml = `<li class="todo list-item">
-          <div class="circle">
-            <svg
-              class="checkmark"
-              xmlns="http://www.w3.org/2000/svg"
-              width="11"
-              height="9"
-            >
-              <path
-                fill="none"
-                stroke="#fff"
-                stroke-width="2"
-                d="M1 4.304L3.696 7l6-6"
-              />
-            </svg>
-          </div>
-          <p class="todo-text">${todo.content}</p>
-          <svg
-            class="delete"
-            xmlns="http://www.w3.org/2000/svg"
-            width="18"
-            height="18"
-          >
-            <path
-              fill="#494C6B"
-              fill-rule="evenodd"
-              d="M16.97 0l.708.707L9.546 8.84l8.132 8.132-.707.707-8.132-8.132-8.132 8.132L0 16.97l8.132-8.132L0 .707.707 0 8.84 8.132 16.971 0z"
-            />
-          </svg>
-        </li>`;
+    <div class="circle">
+      <img class="checkmark" src="./images/icon-check.svg" alt="" />
+    </div>
+    <p class="todo-text">${todo.content}</p>
+    <div>
+      <img class="delete" src="./images/icon-cross.svg" alt="" />
+    </div>
+  </li>`;
     todoList.insertAdjacentHTML("beforeend", todoHtml);
   }
 });
