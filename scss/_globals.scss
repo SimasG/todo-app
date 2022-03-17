@@ -36,7 +36,7 @@ $very-dark-grayish-blue: hsl(235, 19%, 35%);
 body {
   // background: $very-light-gray;
   // temporarily
-  background: rgb(199, 197, 197);
+  background: rgb(230, 230, 230);
   // background-image: $check-background;
 }
 
@@ -98,8 +98,4 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
-}
-
-.hide {
-  display: none;
 }

@@ -16,7 +16,7 @@ html {
 }
 
 body {
-  background: #c7c5c5;
+  background: #e6e6e6;
 }
 
 h1,
@@ -116,10 +116,6 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
-}
-
-.hide {
-  display: none;
 }
 
 body {
@@ -319,5 +315,17 @@ body main .instruction-paragraph {
 .dragged {
   -webkit-filter: drop-shadow(5px 10px 15px #dbdada) invert(20%);
           filter: drop-shadow(5px 10px 15px #dbdada) invert(20%);
+}
+
+.btn.btn-all.current {
+  color: #3a7bfd;
+}
+
+.btn.btn-active.current {
+  color: #3a7bfd;
+}
+
+.btn.btn-completed.current {
+  color: #3a7bfd;
 }
 /*# sourceMappingURL=styles.css.map */

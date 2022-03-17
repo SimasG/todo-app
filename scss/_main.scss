@@ -168,3 +168,15 @@ body {
 .dragged {
   filter: drop-shadow(5px 10px 15px #dbdada) invert(20%);
 }
+
+.btn.btn-all.current {
+  color: $bright-blue;
+}
+
+.btn.btn-active.current {
+  color: $bright-blue;
+}
+
+.btn.btn-completed.current {
+  color: $bright-blue;
+}

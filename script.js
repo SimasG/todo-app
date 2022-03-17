@@ -1,7 +1,8 @@
 // TODO: manipulate (complete, uncomplete, delete stored item(s)) -> DONE
 // TODO: fix bugs (input validation (e.g. empty input), items left functionality) -> DONE
-// TODO: add drag & drop -> WIP
-// TODO: clean UI stuff (limit todo text size, add styles to filters, fix items left counter, sort items consistently) -> WIP
+// TODO: add drag & drop -> DONE
+// TODO: clean UI stuff (limit todo text size, add styles to filters, sort items consistently) -> DONE
+// TODO: (maybe) -> fix items left counter
 // TODO: (maybe) -> fix duplicate input bug (possible solution: unique ID)
 
 const form = document.querySelector(".input-form");
@@ -175,6 +176,10 @@ function addUncompletedTasks() {
 // display uncompleted todos
 btnActive.addEventListener("click", () => {
   console.log(document.querySelectorAll("li:not(.todo-completed)"));
+  btnAll.classList.remove("current");
+  btnCompleted.classList.remove("current");
+  btnActive.classList.add("current");
+
   addCompletedTasks();
   addUncompletedTasks();
   removeCompletedTasks();
@@ -183,6 +188,10 @@ btnActive.addEventListener("click", () => {
 // display completed todos
 btnCompleted.addEventListener("click", () => {
   console.log(document.querySelectorAll(".todo-completed"));
+  btnAll.classList.remove("current");
+  btnActive.classList.remove("current");
+  btnCompleted.classList.add("current");
+
   addCompletedTasks();
   addUncompletedTasks();
   removeUncompletedTasks();
@@ -191,6 +200,10 @@ btnCompleted.addEventListener("click", () => {
 // display all todos
 btnAll.addEventListener("click", () => {
   console.log(document.querySelectorAll(".list-item"));
+  btnActive.classList.remove("current");
+  btnCompleted.classList.remove("current");
+  btnAll.classList.add("current");
+
   addCompletedTasks();
   addUncompletedTasks();
 });
@@ -204,18 +217,17 @@ window.addEventListener("load", () => {
     <p class="todo-text">${todo.content}</p>
     <img class="delete" src="./images/icon-cross.svg" alt="" />
   </li>`;
-    todoList.insertAdjacentHTML("beforeend", todoHtml);
+    todoList.insertAdjacentHTML("afterbegin", todoHtml);
   }
 });
 
 let sortable = new Sortable(todoList, {
-  delay: 1000,
+  delay: 100,
   delayOnTouchOnly: true,
   onStart: function (e) {
-    e.item.className += " dragged";
+    e.item.classList.add("dragged");
   },
   onEnd: function (e) {
-    e.item.className.replace(" dragged", "");
     e.item.classList.remove("dragged");
   },
 });
