@@ -1,19 +1,9 @@
-// TODO: add todos to the list -> DONE
-// TODO: delete todos from the list -> DONE
-// TODO: mark todos as complete -> DONE
-// TODO: clear all completed todos -> DONE
-// TODO: display numbers of todos left -> DONE
-// TODO: add ability to unmark todos as complete (toggle) -> DONE
-// TODO: filter by all/active/complete todos -> DONE
-// TODO: play around with localStorage (storing more than 1 item, displaying stored items indefinitely)
-// TODO: store more than one item (in a single session) -> DONE
-// TODO: store more than one item indefinitly -> DONE
-// TODO: display stored items indefinitely -> DONE
-// TODO: manipulate (complete, uncomplete, delete stored item(s))
-// Problem: I'm unable to manipulate items that are stored in local storage and displayed
+// TODO: manipulate (complete, uncomplete, delete stored item(s)) -> DONE
 
-// TODO: fix bugs (input validation (e.g. empty input), deleting todos, marking all todos as complete, shaper clear completed btn functionality)
-// TODO: clean UI stuff (limit todo size, etc.)
+// TODO: fix bugs (input validation (e.g. empty input), items left functionality) -> WIP
+// TODO: clean UI stuff (limit todo text size, etc.)
+// TODO: add drag & drop
+// TODO: (maybe) -> fix duplicate input bug (possible solution: unique ID)
 
 const form = document.querySelector(".input-form");
 const todoList = document.querySelector(".todo-list");
@@ -42,6 +32,12 @@ function addNewTodo() {
     content: txt.value,
   };
 
+  if (todo.content === "" || todo.content == null) return;
+  if (todo.content.match(/^\s+/g)) return;
+  if (todo.content.match(/\w{1,}/g)) {
+    todo.content = todo.content.trim();
+  }
+
   const todoHtml = `<li class="todo list-item">
   <div class="circle">
     <img class="checkmark" src="./images/icon-check.svg" alt="" />
@@ -56,30 +52,6 @@ function addNewTodo() {
   localStorage.setItem("todos", JSON.stringify(todos));
 
   document.querySelector("#todo-input").value = "";
-  const deleteBtnDynamic = document.querySelectorAll(".delete-dynamic");
-  const completeBtnDynamic = document.querySelectorAll(".circle-dynamic");
-
-  deleteBtnDynamic.forEach((btn) => {
-    btn.addEventListener("click", (e) => {
-      console.log("dynamic btn clicked!");
-      console.log(e.target.parentElement);
-      e.target.parentElement.remove();
-    });
-    displayTodosLeft();
-  });
-
-  completeBtnDynamic.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      btn.classList.toggle("gradient-background");
-      btn.parentNode.querySelector(".todo-text").classList.toggle("gray");
-      btn.parentNode
-        .querySelector(".todo-text")
-        .classList.toggle("strikethrough");
-      btn.classList.toggle("completed");
-      btn.parentNode.classList.toggle("todo-completed");
-      displayTodosLeft();
-    });
-  });
 }
 
 // checking if todos key is available
@@ -91,23 +63,10 @@ if (localStorage && localStorage.getItem("todos")) {
   localStorage.setItem("todos", JSON.stringify(todos));
 }
 
-// stop
-// stop
-// stop
-// stop
-// stop
-// stop
-// stop
-// stop
-// stop
-// stop
-// stop
-// stop
-
 todoList.addEventListener("click", (e) => {
   let storageLength = JSON.parse(localStorage["todos"]).tasks.length;
+
   // COMPLETE BTN
-  // for div "circle"
   if (
     e.target.classList.contains("circle") ||
     e.target.classList.contains("gradient-background")
@@ -154,10 +113,9 @@ todoList.addEventListener("click", (e) => {
 
 // clear all completed todos
 clearBtn.addEventListener("click", () => {
-  console.log(document.querySelectorAll(".completed"));
   document.querySelectorAll(".completed").forEach((todo) => {
-    // todo.parentNode.remove();
-    todo.parentNode.classList.add("hide");
+    todo.parentNode.remove();
+    // todo.parentNode.classList.add("hide");
   });
   displayTodosLeft();
 });
@@ -212,7 +170,6 @@ function addUncompletedTasks() {
 
 // display uncompleted todos
 btnActive.addEventListener("click", () => {
-  //   console.log(document.querySelectorAll(".todo-completed"));
   console.log(document.querySelectorAll("li:not(.todo-completed)"));
   addCompletedTasks();
   addUncompletedTasks();
@@ -221,7 +178,6 @@ btnActive.addEventListener("click", () => {
 
 // display completed todos
 btnCompleted.addEventListener("click", () => {
-  //   console.log(document.querySelectorAll("li:not(.todo-completed)"));
   console.log(document.querySelectorAll(".todo-completed"));
   addCompletedTasks();
   addUncompletedTasks();
