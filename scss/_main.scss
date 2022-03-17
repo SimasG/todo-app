@@ -63,6 +63,7 @@ body {
           background: white;
           padding: 0 2rem;
           border-bottom: 1px $very-light-grayish-blue solid;
+          cursor: pointer;
           .todo-text {
             padding: 1.5rem;
           }
@@ -75,6 +76,9 @@ body {
         }
         .list-item:nth-child(1) {
           border-radius: 5px 5px 0 0;
+        }
+        .list-item:hover {
+          opacity: 0.8;
         }
       }
       .todo-info-container {
@@ -159,4 +163,8 @@ body {
 
 .todo.list-item.hide {
   display: none;
+}
+
+.dragged {
+  filter: drop-shadow(5px 10px 15px #dbdada) invert(20%);
 }

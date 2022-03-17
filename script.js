@@ -1,7 +1,7 @@
 // TODO: manipulate (complete, uncomplete, delete stored item(s)) -> DONE
 // TODO: fix bugs (input validation (e.g. empty input), items left functionality) -> DONE
-// TODO: clean UI stuff (limit todo text size, etc.) -> DONE
-// TODO: add drag & drop
+// TODO: add drag & drop -> WIP
+// TODO: clean UI stuff (limit todo text size, add styles to filters, fix items left counter, sort items consistently) -> WIP
 // TODO: (maybe) -> fix duplicate input bug (possible solution: unique ID)
 
 const form = document.querySelector(".input-form");
@@ -206,4 +206,16 @@ window.addEventListener("load", () => {
   </li>`;
     todoList.insertAdjacentHTML("beforeend", todoHtml);
   }
+});
+
+let sortable = new Sortable(todoList, {
+  delay: 1000,
+  delayOnTouchOnly: true,
+  onStart: function (e) {
+    e.item.className += " dragged";
+  },
+  onEnd: function (e) {
+    e.item.className.replace(" dragged", "");
+    e.item.classList.remove("dragged");
+  },
 });
