@@ -9,6 +9,10 @@
 // TODO: store more than one item (in a single session) -> DONE
 // TODO: store more than one item indefinitly -> DONE
 // TODO: display stored items indefinitely -> DONE
+// TODO: manipulate (complete, uncomplete, delete stored item(s)) -> DONE
+// TODO: fix bugs (input validation (e.g. empty input), items left functionality) -> DONE
+// TODO: add drag & drop -> DONE
+// TODO: clean UI stuff (limit todo text size, add styles to filters, sort items consistently) -> DONE
 
 // delete todo
 deleteBtn.forEach((btn) => {

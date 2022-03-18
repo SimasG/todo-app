@@ -1,7 +1,3 @@
-// TODO: manipulate (complete, uncomplete, delete stored item(s)) -> DONE
-// TODO: fix bugs (input validation (e.g. empty input), items left functionality) -> DONE
-// TODO: add drag & drop -> DONE
-// TODO: clean UI stuff (limit todo text size, add styles to filters, sort items consistently) -> DONE
 // TODO: (maybe) -> fix items left counter
 // TODO: (maybe) -> fix duplicate input bug (possible solution: unique ID)
 
@@ -22,14 +18,13 @@ form.addEventListener("submit", function (e) {
   addNewTodo();
 });
 
-let todos = {
-  tasks: [],
-};
+let todos = [];
 
 function addNewTodo() {
   const txt = document.querySelector("#todo-input");
   let todo = {
     content: txt.value,
+    state: "incomplete",
   };
 
   if (
@@ -43,7 +38,9 @@ function addNewTodo() {
     todo.content = todo.content.trim();
   }
 
-  const todoHtml = `<li class="todo list-item">
+  const uniqueId = Math.floor(Math.random() * 100000);
+
+  const todoHtml = `<li class="todo list-item" id=${uniqueId}>
   <div class="circle">
     <img class="checkmark" src="./images/icon-check.svg" alt="" />
   </div>
@@ -52,10 +49,8 @@ function addNewTodo() {
 </li>`;
   todoList.insertAdjacentHTML("afterbegin", todoHtml);
 
-  todos.tasks.push(todo);
-
+  todos.push(todo);
   localStorage.setItem("todos", JSON.stringify(todos));
-
   document.querySelector("#todo-input").value = "";
 }
 
@@ -68,50 +63,72 @@ if (localStorage && localStorage.getItem("todos")) {
   localStorage.setItem("todos", JSON.stringify(todos));
 }
 
+// COMPLETE AND DELETE BTN EVENTS LISTENERS
 todoList.addEventListener("click", (e) => {
-  let storageLength = JSON.parse(localStorage["todos"]).tasks.length;
+  let storageLength = JSON.parse(localStorage["todos"]).length;
 
-  // COMPLETE BTN
-  if (
-    e.target.classList.contains("circle") ||
-    e.target.classList.contains("gradient-background")
-  ) {
-    e.target.classList.toggle("gradient-background");
-    e.target.parentNode.querySelector(".todo-text").classList.toggle("gray");
-    e.target.parentNode
-      .querySelector(".todo-text")
-      .classList.toggle("strikethrough");
-    e.target.classList.toggle("completed");
-    e.target.parentNode.classList.toggle("todo-completed");
-  } else if (e.target.classList.contains("checkmark")) {
-    e.target.parentNode.classList.toggle("gradient-background");
-    e.target.parentNode.parentNode
-      .querySelector(".todo-text")
-      .classList.toggle("gray");
-    e.target.parentNode.parentNode
-      .querySelector(".todo-text")
-      .classList.toggle("strikethrough");
-    e.target.parentNode.classList.toggle("completed");
-    e.target.parentNode.parentNode.classList.toggle("todo-completed");
-  }
+  // console.log(e.target.parentNode.parentNode.childNodes[3].innerHTML);
+  // console.log(e.target.parentNode.childNodes[5].classList.value);
 
-  // DELETE BTN
   for (let i = 0; i < storageLength; i++) {
+    // complete btn
     if (
+      e.target.classList.contains("circle") ||
+      (e.target.classList.contains("gradient-background") &&
+        e.target.parentNode.childNodes[3].innerHTML ===
+          JSON.parse(localStorage["todos"])[i].content)
+    ) {
+      e.target.classList.toggle("gradient-background");
+      e.target.parentNode.querySelector(".todo-text").classList.toggle("gray");
+      e.target.parentNode
+        .querySelector(".todo-text")
+        .classList.toggle("strikethrough");
+      e.target.classList.toggle("completed");
+      e.target.parentNode.classList.toggle("todo-completed");
+
+      todos[i].state = "complete";
+      console.log(todos[i]);
+      return localStorage.setItem("todos", JSON.stringify(todos));
+    } else if (
+      e.target.classList.contains("checkmark") &&
+      e.target.parentNode.parentNode.childNodes[3].innerHTML ===
+        JSON.parse(localStorage["todos"])[i].content
+    ) {
+      e.target.parentNode.classList.toggle("gradient-background");
+      e.target.parentNode.parentNode
+        .querySelector(".todo-text")
+        .classList.toggle("gray");
+      e.target.parentNode.parentNode
+        .querySelector(".todo-text")
+        .classList.toggle("strikethrough");
+      e.target.parentNode.classList.toggle("completed");
+      e.target.parentNode.parentNode.classList.toggle("todo-completed");
+
+      todos[i].state = "complete";
+      console.log(todos);
+      return localStorage.setItem("todos", JSON.stringify(todos));
+    }
+    // delete btn;
+    else if (
       e.target.parentNode.childNodes[3].innerHTML ===
-        JSON.parse(localStorage["todos"]).tasks[i].content &&
+        JSON.parse(localStorage["todos"])[i].content &&
       e.target.classList.value === "delete"
     ) {
-      const newTodos = todos.tasks.filter((todo) => {
-        return (
-          todo.content !== JSON.parse(localStorage["todos"]).tasks[i].content
-        );
+      const newTodos = todos.filter((todo) => {
+        return todo.content !== JSON.parse(localStorage["todos"])[i].content;
       });
-      todos.tasks = newTodos;
+      todos = newTodos;
       localStorage.setItem("todos", JSON.stringify(todos));
       e.target.parentNode.remove();
     }
   }
+
+  // for (let i = 0; i < storageLength; i++) {
+  //   console.log(e.target.parentNode.childNodes[3].innerHTML);
+  //   console.log(JSON.parse(localStorage["todos"])[i].content);
+  // }
+
+  // console.log(e.target.parentNode.id);
 
   displayTodosLeft();
 });
@@ -208,9 +225,10 @@ btnAll.addEventListener("click", () => {
   addUncompletedTasks();
 });
 
-window.addEventListener("load", () => {
-  for (let todo of todos.tasks) {
-    const todoHtml = `<li class="todo list-item">
+window.addEventListener("DOMContentLoaded", () => {
+  for (let todo of todos) {
+    const uniqueId = Math.floor(Math.random() * 100000);
+    const todoHtml = `<li class="todo list-item" id=${uniqueId}>
     <div class="circle">
       <img class="checkmark" src="./images/icon-check.svg" alt="" />
     </div>
