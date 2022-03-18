@@ -70,46 +70,47 @@ todoList.addEventListener("click", (e) => {
   // console.log(e.target.parentNode.parentNode.childNodes[3].innerHTML);
   // console.log(e.target.parentNode.childNodes[5].classList.value);
 
+  // complete btn
+  if (
+    e.target.classList.contains("circle") ||
+    e.target.classList.contains("gradient-background")
+    // && e.target.parentNode.childNodes[3].innerHTML ===
+    //   JSON.parse(localStorage["todos"])[i].content
+  ) {
+    e.target.classList.toggle("gradient-background");
+    e.target.parentNode.querySelector(".todo-text").classList.toggle("gray");
+    e.target.parentNode
+      .querySelector(".todo-text")
+      .classList.toggle("strikethrough");
+    e.target.classList.toggle("completed");
+    e.target.parentNode.classList.toggle("todo-completed");
+
+    // todos[i].state = "complete";
+    // console.log(todos[i]);
+    // return localStorage.setItem("todos", JSON.stringify(todos));
+  } else if (
+    e.target.classList.contains("checkmark")
+    // && e.target.parentNode.parentNode.childNodes[3].innerHTML ===
+    //   JSON.parse(localStorage["todos"])[i].content
+  ) {
+    e.target.parentNode.classList.toggle("gradient-background");
+    e.target.parentNode.parentNode
+      .querySelector(".todo-text")
+      .classList.toggle("gray");
+    e.target.parentNode.parentNode
+      .querySelector(".todo-text")
+      .classList.toggle("strikethrough");
+    e.target.parentNode.classList.toggle("completed");
+    e.target.parentNode.parentNode.classList.toggle("todo-completed");
+
+    // todos[i].state = "complete";
+    // console.log(todos[i]);
+    // return localStorage.setItem("todos", JSON.stringify(todos));
+  }
+
   for (let i = 0; i < storageLength; i++) {
-    // complete btn
-    if (
-      e.target.classList.contains("circle") ||
-      (e.target.classList.contains("gradient-background") &&
-        e.target.parentNode.childNodes[3].innerHTML ===
-          JSON.parse(localStorage["todos"])[i].content)
-    ) {
-      e.target.classList.toggle("gradient-background");
-      e.target.parentNode.querySelector(".todo-text").classList.toggle("gray");
-      e.target.parentNode
-        .querySelector(".todo-text")
-        .classList.toggle("strikethrough");
-      e.target.classList.toggle("completed");
-      e.target.parentNode.classList.toggle("todo-completed");
-
-      todos[i].state = "complete";
-      console.log(todos[i]);
-      return localStorage.setItem("todos", JSON.stringify(todos));
-    } else if (
-      e.target.classList.contains("checkmark") &&
-      e.target.parentNode.parentNode.childNodes[3].innerHTML ===
-        JSON.parse(localStorage["todos"])[i].content
-    ) {
-      e.target.parentNode.classList.toggle("gradient-background");
-      e.target.parentNode.parentNode
-        .querySelector(".todo-text")
-        .classList.toggle("gray");
-      e.target.parentNode.parentNode
-        .querySelector(".todo-text")
-        .classList.toggle("strikethrough");
-      e.target.parentNode.classList.toggle("completed");
-      e.target.parentNode.parentNode.classList.toggle("todo-completed");
-
-      todos[i].state = "complete";
-      console.log(todos);
-      return localStorage.setItem("todos", JSON.stringify(todos));
-    }
     // delete btn;
-    else if (
+    if (
       e.target.parentNode.childNodes[3].innerHTML ===
         JSON.parse(localStorage["todos"])[i].content &&
       e.target.classList.value === "delete"
@@ -122,13 +123,6 @@ todoList.addEventListener("click", (e) => {
       e.target.parentNode.remove();
     }
   }
-
-  // for (let i = 0; i < storageLength; i++) {
-  //   console.log(e.target.parentNode.childNodes[3].innerHTML);
-  //   console.log(JSON.parse(localStorage["todos"])[i].content);
-  // }
-
-  // console.log(e.target.parentNode.id);
 
   displayTodosLeft();
 });
